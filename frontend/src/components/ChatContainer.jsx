@@ -27,7 +27,7 @@ const ChatContainer = () => {
       messageEndRef.current.scrollIntoView({ behavior: "smooth" });
     }
   }, [messages]);
-
+  console.log("Hello");
   if (isMessagesLoading) {
     return (
       <div className="flex-1 flex flex-col overflow-auto">
