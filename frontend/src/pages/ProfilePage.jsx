@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useAuthStore } from "../store/useAuthStore";
 import { Camera, Mail, User, X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import Avatar from "../components/Avatar";
 
 const ProfilePage = () => {
   const { authUser, isUpdatingProfile, updateProfile } = useAuthStore();
@@ -42,10 +43,11 @@ const ProfilePage = () => {
 
           <div className="flex flex-col items-center gap-4">
             <div className="relative">
-              <img
-                src={selectedImg || authUser.profilePic || "/avatar.png"}
-                alt="Profile"
-                className="size-32 rounded-full object-cover border-4 "
+              <Avatar
+                user={authUser}
+                src={selectedImg}
+                size="size-32"
+                className="border-4"
               />
               <label
                 htmlFor="avatar-upload"
