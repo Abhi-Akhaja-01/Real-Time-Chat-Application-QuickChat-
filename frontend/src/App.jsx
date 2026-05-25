@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { useAuthStore } from "./store/useAuthStore";
 import { Loader } from "lucide-react";
@@ -16,6 +16,7 @@ import SettingsPage from "./pages/SettingsPage";
 const App = () => {
   const { authUser, checkAuth, isCheckingAuth } = useAuthStore();
   const { theme } = useThemeStore();
+  const { pathname } = useLocation();
 
   useEffect(() => {
     checkAuth();
@@ -30,7 +31,7 @@ const App = () => {
 
   return (
     <div data-theme={theme}>
-      <Navbar />
+      {pathname !== "/" && <Navbar />}
       <Routes>
         <Route path="/" element={authUser ? <HomePage /> : <Navigate to="/login" />} />
         <Route path="/signup" element={!authUser ? <SignUpPage /> : <Navigate to="/" />} />

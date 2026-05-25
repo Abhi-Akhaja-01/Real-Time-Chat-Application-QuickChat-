@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { useChatStore } from "../store/useChatStore";
-import { Image, Send, X, FileText } from "lucide-react";
+import { Image, Send, X, FileText, Smile, Paperclip, Mic } from "lucide-react";
 import toast from "react-hot-toast";
 
 const MessageInput = () => {
@@ -8,6 +8,7 @@ const MessageInput = () => {
   const [filePreview, setFilePreview] = useState(null);
   const imageInputRef = useRef(null);
   const pdfInputRef = useRef(null);
+  
   const { sendMessage } = useChatStore();
 
   const handleFileChange = (e, expectedType) => {
@@ -43,10 +44,9 @@ const MessageInput = () => {
     try {
       await sendMessage({
         text: text.trim(),
-        image: filePreview, // Backend accepts attachments via the image field
+        image: filePreview, 
       });
 
-      // Clear form
       setText("");
       removeFile();
     } catch (error) {
@@ -55,12 +55,12 @@ const MessageInput = () => {
   };
 
   return (
-    <div className="p-4 w-full border-t border-white/5 bg-base-100/30 backdrop-blur-lg">
+    <div className="px-4 py-3 w-full bg-base-200/90 border-t border-base-300">
       {filePreview && (
         <div className="mb-3 flex items-center gap-2">
           <div className="relative">
             {filePreview.startsWith("data:application/pdf") ? (
-              <div className="w-20 h-20 flex flex-col items-center justify-center rounded-lg border border-zinc-700 bg-base-200">
+              <div className="w-20 h-20 flex flex-col items-center justify-center rounded-lg border border-zinc-700 bg-base-300">
                 <FileText className="size-8 text-primary mb-1" />
                 <span className="text-[10px] text-zinc-400">PDF</span>
               </div>
@@ -73,8 +73,7 @@ const MessageInput = () => {
             )}
             <button
               onClick={removeFile}
-              className="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full bg-base-300
-              flex items-center justify-center"
+              className="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full bg-base-content/80 text-base-100 flex items-center justify-center"
               type="button"
             >
               <X className="size-3" />
@@ -83,59 +82,53 @@ const MessageInput = () => {
         </div>
       )}
 
-      <form onSubmit={handleSendMessage} className="flex items-center gap-2">
-        <div className="flex-1 flex gap-2">
+      <form onSubmit={handleSendMessage} className="flex items-center gap-3">
+        <Smile className="size-7 text-base-content/60 cursor-pointer hover:text-base-content transition-colors flex-shrink-0" />
+        
+        <div className="dropdown dropdown-top dropdown-end flex-shrink-0">
+          <label tabIndex={0} className="cursor-pointer">
+            <Paperclip className="size-6 text-base-content/60 hover:text-base-content transition-colors mt-1" />
+          </label>
+          <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-200 rounded-box w-52 mb-4">
+            <li><a onClick={() => imageInputRef.current?.click()}><Image className="size-4"/> Photos & Videos</a></li>
+            <li><a onClick={() => pdfInputRef.current?.click()}><FileText className="size-4"/> Document</a></li>
+          </ul>
+        </div>
+        
+        <input
+          type="file"
+          accept="image/*"
+          className="hidden"
+          ref={imageInputRef}
+          onChange={(e) => handleFileChange(e, "image")}
+        />
+        <input
+          type="file"
+          accept="application/pdf"
+          className="hidden"
+          ref={pdfInputRef}
+          onChange={(e) => handleFileChange(e, "pdf")}
+        />
+
+        <div className="flex-1 bg-base-100 rounded-lg overflow-hidden flex items-center shadow-sm">
           <input
             type="text"
-            className="w-full input input-bordered rounded-full input-sm sm:input-md bg-base-200/50 focus:bg-base-200 transition-all duration-300 shadow-sm"
-            placeholder="Type a message..."
+            className="w-full bg-transparent border-none focus:outline-none focus:ring-0 px-4 py-2.5 text-base-content"
+            placeholder="Type a message"
             value={text}
             onChange={(e) => setText(e.target.value)}
           />
-          
-          {/* Image Input */}
-          <input
-            type="file"
-            accept="image/*"
-            className="hidden"
-            ref={imageInputRef}
-            onChange={(e) => handleFileChange(e, "image")}
-          />
-          {/* PDF Input */}
-          <input
-            type="file"
-            accept="application/pdf"
-            className="hidden"
-            ref={pdfInputRef}
-            onChange={(e) => handleFileChange(e, "pdf")}
-          />
-
-          <button
-            type="button"
-            className={`hidden sm:flex btn btn-circle
-                     ${filePreview && filePreview.startsWith("data:image/") ? "text-success" : "text-zinc-400"}`}
-            onClick={() => imageInputRef.current?.click()}
-          >
-            <Image size={20} />
-          </button>
-
-          <button
-            type="button"
-            className={`hidden sm:flex btn btn-circle
-                     ${filePreview && filePreview.startsWith("data:application/pdf") ? "text-success" : "text-zinc-400"}`}
-            onClick={() => pdfInputRef.current?.click()}
-          >
-            <FileText size={20} />
-          </button>
-
         </div>
-        <button
-          type="submit"
-          className="btn btn-sm btn-circle bg-primary hover:bg-primary/90 text-primary-content shadow-lg transition-transform hover:scale-105"
-          disabled={!text.trim() && !filePreview}
-        >
-          <Send size={22} />
-        </button>
+
+        {text.trim() || filePreview ? (
+           <button type="submit" className="flex-shrink-0 p-2 text-base-content/60 hover:text-base-content transition-colors">
+              <Send size={24} className="fill-current" />
+           </button>
+        ) : (
+           <button type="button" className="flex-shrink-0 p-2 text-base-content/60 hover:text-base-content transition-colors">
+              <Mic size={24} />
+           </button>
+        )}
       </form>
     </div>
   );
