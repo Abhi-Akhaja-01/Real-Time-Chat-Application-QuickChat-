@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
 import { useAuthStore } from "../store/useAuthStore";
-import { LogOut, MessageSquare, Settings, User } from "lucide-react";
+import { useThemeStore } from "../store/useThemeStore";
+import { LogOut, MessageSquare, Settings, User, Palette } from "lucide-react";
 
 const Navbar = () => {
   const { logout, authUser } = useAuthStore();
+  const { theme, setTheme } = useThemeStore();
 
   return (
     <header className="glass-panel fixed w-full top-0 z-40 transition-all duration-300">
@@ -15,6 +17,7 @@ const Navbar = () => {
           <h1 className="text-lg font-bold">QuickChat</h1>
         </Link>
         <div className="flex items-center gap-2">
+          
           <Link to={"/settings"} className={`btn btn-sm gap-2 transition-colors`}>
             <Settings className="w-4 h-4" />
             <span className="hidden sm:inline">Settings</span>

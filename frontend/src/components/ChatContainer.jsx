@@ -53,22 +53,12 @@ const ChatContainer = () => {
               className={`flex ${isMe ? "justify-end" : "justify-start"} mb-4`}
             >
               <div 
-                className={`flex flex-col relative max-w-[85%] sm:max-w-[70%] px-3 py-2 rounded-lg shadow-sm 
+                className={`flex flex-col relative max-w-[85%] sm:max-w-[70%] px-4 py-2 rounded-xl shadow-sm
                   ${isMe 
-                    ? "bg-[#dcf8c6] text-black dark:bg-[#005c4b] dark:text-white rounded-tr-none" 
-                    : "bg-white text-black dark:bg-[#202c33] dark:text-white rounded-tl-none"
+                    ? "bg-primary text-primary-content rounded-tr-none" 
+                    : "bg-base-200 text-base-content rounded-tl-none"
                   }`}
               >
-                {/* Optional Tail Effect */}
-                <div className={`absolute top-0 w-3 h-4 ${isMe ? "-right-2" : "-left-2"}`}>
-                  <svg viewBox="0 0 8 13" width="8" height="13" className={`fill-current ${isMe ? "text-[#dcf8c6] dark:text-[#005c4b]" : "text-white dark:text-[#202c33]"}`}>
-                    {isMe ? (
-                      <path d="M5.188 1H0v11.193l6.467-8.625C7.526 2.156 6.958 1 5.188 1z" />
-                    ) : (
-                      <path d="M1.533 3.568L8 12.193V1H2.812C1.042 1 .474 2.156 1.533 3.568z" />
-                    )}
-                  </svg>
-                </div>
 
                 {message.image && message.image.startsWith("data:application/pdf") ? (
                   <a

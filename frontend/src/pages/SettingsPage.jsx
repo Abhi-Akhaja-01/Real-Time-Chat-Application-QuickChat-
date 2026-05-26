@@ -55,57 +55,7 @@ const SettingsPage = () => {
             </div>
           </section>
 
-          {/* Account & General Section */}
-          <section className="space-y-4">
-            <h2 className="text-lg font-semibold flex items-center gap-2">
-              <User className="w-5 h-5 text-primary" /> Account & General
-            </h2>
 
-            <div className="bg-base-200 rounded-2xl overflow-hidden shadow-sm">
-              <Link
-                to="/profile"
-                className="flex items-center justify-between p-4 hover:bg-base-300 transition-colors border-b border-base-300"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="p-2 bg-primary/10 rounded-lg text-primary">
-                    <User size={20} />
-                  </div>
-                  <span className="font-medium">Profile Information</span>
-                </div>
-                <ChevronRight size={18} className="text-base-content/40" />
-              </Link>
-
-              <div className="flex items-center justify-between p-4 hover:bg-base-300 transition-colors border-b border-base-300 cursor-not-allowed opacity-60">
-                <div className="flex items-center gap-3">
-                  <div className="p-2 bg-primary/10 rounded-lg text-primary">
-                    <Bell size={20} />
-                  </div>
-                  <span className="font-medium">Notifications</span>
-                </div>
-                <span className="text-[10px] uppercase font-bold bg-base-300 px-2 py-1 rounded-md">Soon</span>
-              </div>
-
-              <div className="flex items-center justify-between p-4 hover:bg-base-300 transition-colors border-b border-base-300 cursor-not-allowed opacity-60">
-                <div className="flex items-center gap-3">
-                  <div className="p-2 bg-primary/10 rounded-lg text-primary">
-                    <Lock size={20} />
-                  </div>
-                  <span className="font-medium">Privacy & Security</span>
-                </div>
-                <span className="text-[10px] uppercase font-bold bg-base-300 px-2 py-1 rounded-md">Soon</span>
-              </div>
-
-              <div className="flex items-center justify-between p-4 hover:bg-base-300 transition-colors opacity-60 cursor-not-allowed">
-                <div className="flex items-center gap-3">
-                  <div className="p-2 bg-primary/10 rounded-lg text-primary">
-                    <Info size={20} />
-                  </div>
-                  <span className="font-medium">About Chatty</span>
-                </div>
-                <ChevronRight size={18} className="text-base-content/40" />
-              </div>
-            </div>
-          </section>
         </div>
       </div>
     </div>

@@ -85,11 +85,11 @@ const MessageInput = () => {
       <form onSubmit={handleSendMessage} className="flex items-center gap-3">
         <Smile className="size-7 text-base-content/60 cursor-pointer hover:text-base-content transition-colors flex-shrink-0" />
         
-        <div className="dropdown dropdown-top dropdown-end flex-shrink-0">
+        <div className="dropdown dropdown-top flex-shrink-0">
           <label tabIndex={0} className="cursor-pointer">
             <Paperclip className="size-6 text-base-content/60 hover:text-base-content transition-colors mt-1" />
           </label>
-          <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-200 rounded-box w-52 mb-4">
+          <ul tabIndex={0} className="dropdown-content z-50 menu p-2 shadow bg-base-200 rounded-box w-52 mb-4">
             <li><a onClick={() => imageInputRef.current?.click()}><Image className="size-4"/> Photos & Videos</a></li>
             <li><a onClick={() => pdfInputRef.current?.click()}><FileText className="size-4"/> Document</a></li>
           </ul>

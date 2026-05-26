@@ -28,22 +28,22 @@ const Sidebar = () => {
 
   return (
     <aside className="h-full w-full flex flex-col bg-base-100">
-      {/* WhatsApp Sidebar Header */}
-      <div className="bg-base-200 px-4 py-3 flex items-center justify-between border-b border-base-300">
-        <div className="cursor-pointer">
-          {authUser && <Avatar user={authUser} size="size-10" />}
+      <div className="border-b border-base-300 w-full p-5">
+        <div className="flex items-center gap-2">
+          <Users className="size-6" />
+          <span className="font-medium hidden lg:block">Contacts</span>
         </div>
-        <div className="flex items-center gap-4 text-base-content/60">
-          <CircleDashed className="size-5 hover:text-base-content cursor-pointer transition-colors" />
-          <MessageSquarePlus className="size-5 hover:text-base-content cursor-pointer transition-colors" />
-          <MoreVertical className="size-5 hover:text-base-content cursor-pointer transition-colors" />
-        </div>
-      </div>
-
-      {/* Search Bar Placeholder */}
-      <div className="p-2 border-b border-base-300">
-        <div className="bg-base-200 rounded-lg p-1.5 flex items-center px-3">
-          <span className="text-sm text-base-content/60 w-full text-center py-1">Search or start new chat</span>
+        {/* Online filter toggle */}
+        <div className="mt-3 hidden lg:flex items-center gap-2">
+          <label className="cursor-pointer flex items-center gap-2">
+            <input
+              type="checkbox"
+              checked={showOnlineOnly}
+              onChange={(e) => setShowOnlineOnly(e.target.checked)}
+              className="checkbox checkbox-sm"
+            />
+            <span className="text-sm">Show online only</span>
+          </label>
         </div>
       </div>
 
@@ -71,12 +71,9 @@ const Sidebar = () => {
                 <div className="font-medium truncate text-base-content">
                   {user.fullName} {user._id === authUser?._id && "(You)"}
                 </div>
-                <div className="text-xs text-base-content/50">
-                   {onlineUsers.includes(user._id) ? "Online" : ""}
-                </div>
               </div>
               <div className="text-sm text-base-content/60 truncate">
-                 Hey there! I am using WhatsApp.
+                 {onlineUsers.includes(user._id) ? "Online" : "Offline"}
               </div>
             </div>
 
